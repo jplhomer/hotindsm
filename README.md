@@ -2,6 +2,4 @@
 
 A cute little map which shows Foursquare's trending venues in Downtown Des Moines.
 
-## Hey, Josh
-
-Be sure to `subtree` this `/cloud/` directory before posting to Github, please. Thanks.
+Built using the [Foursquare API](http://developer.foursquare.com), [Parse](http://parse.com, and [Google Maps API](http://developers.google.com/maps).
