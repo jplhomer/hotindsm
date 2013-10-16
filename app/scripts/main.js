@@ -61,4 +61,13 @@ $(document).ready(function() {
 			console.log(error);
 		}
 	});
+
+	Parse.Cloud.run('trendingInNYC', {}, {
+		success: function(result) {
+			console.log(result);
+		},
+		error: function(result, error) {
+			console.log(error.message);
+		}
+	});
 });
