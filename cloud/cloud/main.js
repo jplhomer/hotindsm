@@ -53,7 +53,7 @@ function getTrendingVenues (callback) {
  */
 function hitFoursquare (response) {
 	Parse.Cloud.httpRequest({
-		url: 'https://api.foursquare.com/v2/venues/trending?ll=41.5839,-93.6289&client_id=SJKKK5FRX1UUF3O35QY5X3BLNSO5YO34ATB23FI3Y1YSA25C&client_secret=WEKOQFGUEAAC4BTGXWTPZTAQTBCKEISIQPULYW24XKY3GUPY&v=20131014&radius=2000&limit=10',
+		url: 'https://api.foursquare.com/v2/venues/trending?ll=41.5839,-93.6289&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRETY&v=20131014&radius=2000&limit=10',
 		success: function(httpResponse) {
 			console.log('Connected with Foursquare');
 

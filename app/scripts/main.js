@@ -101,6 +101,7 @@ function setTrendsList(venues) {
 }
 	
 $(document).ready(function() {
+	// Add your own Parse keys here.
 	Parse.initialize('0eVcAKXZWKD1p8Dy8MiipuCy7Ye67y64lBEOjuYW', '3nZXyBOHROHK9YAoj0jvEGyQjdf4IEpBYAZC0W2k');
 	google.maps.event.addDomListener(window, 'load', initialize);
 
