@@ -36,6 +36,7 @@ function initialize() {
 
 	var mapOptions = {
 		center: new google.maps.LatLng(41.5839,-93.6289),
+		//center: new google.maps.LatLng(40.7,-74),
 		zoom: 14,
 		disableDefaultUI: true,
 		VisualRefresh: true,
@@ -62,14 +63,14 @@ function setMarkers(venues) {
 		var contentString = "<div class='info-window'>" +
 			"<h4>" + venue.name + " (" + venue.hereNow.count + " here now)</h4>";
 
-		if (infowindow)
-			infowindow.close();
-
 		infowindow = new google.maps.InfoWindow({
 			content: contentString
 		});
 
 		google.maps.event.addListener(marker, 'click', function() {
+			if (infowindow)
+				infowindow.close();
+			infowindow.setContent(contentString);
 			infowindow.open(map,marker);
 		});
 	});
