@@ -42,4 +42,4 @@ To run the Cloud Code, you'll need to register a new application on [Foursquare]
 
 Replace the `client_id` and `client_secret` parameters in the `hitFoursquare` function within `main.js`. Yeah, this is pretty messy. But just do it.
 
-You'll also probably want to update the `lat` and `lng` parameters of the API request URL to to be Des Moines. So it's totally up to you.
+You'll also probably want to update the `lat` and `lng` parameters of the API request URL to not be Des Moines. So it's totally up to you.
