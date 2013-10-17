@@ -8,6 +8,10 @@ Built using the [Foursquare API](http://developer.foursquare.com), [Parse](http:
 
 This just grabs the current Foursquare Trending Venues for the latitude and longitude coordinates of Downtown Des Moines. Often times, there are no trending venues. Which is OK. I guess.
 
+## Demo 
+
+See the live demo at [http://jplhomer.github.io/hotindsm/](http://jplhomer.github.io/hotindsm/).
+ 
 ## Development
 
 To create your own, clones the repository. You'll need Node installed. Navigate to the repository on your local machine and run:
