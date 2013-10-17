@@ -1,7 +1,109 @@
-$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
+@import 'compass';
 
-@import 'sass-bootstrap/lib/bootstrap';
+$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
+$noticia: 'Noticia Text', serif;
+
+$green: #c4d0a4;
+$orange: #E89549;
+$red: #FF0000;
+$purple: #540CE8;
+$maroon: #9D736C;
+$dark: rgba(0, 0, 0, 0.9);
 
 html { height: 100% }
 body { height: 100%; margin: 0; padding: 0 }
 #map-canvas { height: 100% }
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	font-family: $noticia;
+	z-index: 100;
+	background: $dark;
+	padding: 1em 0;
+	width: 250px;
+	overflow-x: scroll;
+
+	color: #efefef;
+
+	@include opacity(0.9);
+
+	h1 {
+		color: tan;
+		line-height: 0.8;
+		text-align: center;
+		font-size: 3.5em;
+		margin: 0 0 0.5em 0;
+		text-shadow: 1px 1px 3px #666;
+
+		em {
+			display: block;
+			font-size: 1.5em;
+			font-style: normal;
+		}
+	}
+
+	h2 {
+		padding: 0 1rem;
+	}
+
+	p {
+		font-size: 0.9em;
+		padding: 0 1rem;
+	}
+
+	a {
+		color: $orange;
+	}
+
+	p.attribution {
+		background: #000;
+		position: absolute;
+		bottom: 0;
+		padding-bottom: 1rem;
+		padding-top: 1rem;
+		font-size: 0.7em;
+	}
+}
+
+#trends {
+	list-style: none;
+	padding: 0;
+
+	a {
+		text-decoration: none;
+		color: $orange;
+		display: block;
+		padding: 1em 1em 1em 1.5em;
+
+		@include transition(background 0.3s ease-in-out);
+
+		&:hover {
+			background: #000;
+		}
+	}
+
+	h4 {
+		margin: 0;
+	}
+
+	.none {
+		color: $red;
+		padding: 1em;
+		display: block;
+	}
+
+	.type, .checkins {
+		display: block;
+	}
+
+	.type img {
+		width: 15px;
+	}
+
+	.checkins {
+		font-size: 0.8em;
+	}
+}

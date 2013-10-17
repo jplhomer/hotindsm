@@ -3,4 +3,5 @@ dist
 .tmp
 .sass-cache
 app/bower_components
-/cloud/
+/cloud/config/
+/cloud/public/

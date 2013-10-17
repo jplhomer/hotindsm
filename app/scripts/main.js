@@ -1,18 +1,50 @@
-function makeRequest(query, callback) {
-	var query = query + ((query.indexOf('?') > -1) ? '&' : '?') + 'client_id=' + apiKey + '&client_secret=' + apiSecret + '&v=20131014';
-	$.getJSON(apiUrl + 'v2/' + query, {}, callback);
-};
+var infowindow = null;
+var map;
 
 function initialize() {
+	var stylesArray = [
+	{
+		"featureType": "landscape",
+		"stylers": [
+		{ "color": "#c4d0a4" }
+		]
+	},{
+		"featureType": "road.highway.controlled_access",
+		"stylers": [
+		{ "color": "#ffffe4" }
+		]
+	},{
+		"featureType": "road.local",
+		"stylers": [
+		{ "color": "#ddffe2" }
+		]
+	},{
+		"featureType": "road.arterial",
+		"stylers": [
+		{ "color": "#ffc980" },
+		{ "saturation": -21 },
+		{ "hue": "#ffee00" }
+		]
+	},{
+		"featureType": "administrative",
+		"stylers": [
+		{ "weight": 0.1 },
+		{ "hue": "#ff0008" },
+		{ "color": "#ff5a54" }
+		]
+	}];
+
 	var mapOptions = {
 		center: new google.maps.LatLng(41.5839,-93.6289),
-		zoom: 15,
+		zoom: 14,
 		disableDefaultUI: true,
 		VisualRefresh: true,
 		draggable: false,
 		scrollwheel: false,
+		styles: stylesArray,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
+
 	map = new google.maps.Map(document.getElementById("map-canvas"),
 		mapOptions);
 }
@@ -28,9 +60,12 @@ function setMarkers(venues) {
 		});
 
 		var contentString = "<div class='info-window'>" +
-			"<h1>" + venue.name + "</h1>";
+			"<h4>" + venue.name + " (" + venue.hereNow.count + " here now)</h4>";
 
-		var infowindow = new google.maps.InfoWindow({
+		if (infowindow)
+			infowindow.close();
+
+		infowindow = new google.maps.InfoWindow({
 			content: contentString
 		});
 
@@ -40,15 +75,31 @@ function setMarkers(venues) {
 	});
 }
 
-var token,
-	map,
-	lat = 41.5839,
-	lng = -93.6289,
-	authUrl = 'https://foursquare.com/',
-	apiKey = 'SJKKK5FRX1UUF3O35QY5X3BLNSO5YO34ATB23FI3Y1YSA25C',
-	apiSecret = 'WEKOQFGUEAAC4BTGXWTPZTAQTBCKEISIQPULYW24XKY3GUPY',
-	apiUrl = 'https://api.foursquare.com/';
+function setTrendsList(venues) {
+	if ( venues.length > 0 ) {
+		$(venues).each(function(i, venue) {
+			console.log(venue);
 
+			var name = venue.name;
+			var hereNow = venue.hereNow.count;
+			var checkins = venue.stats.checkinsCount;
+			var type = venue.categories[0].shortName;
+			var iconURL = venue.categories[0].icon.prefix + '64' + venue.categories[0].icon.suffix;
+			var url = 'http://foursquare.com/venue/' + venue.id;
+
+			var html = '<a href="' + url + '" target="_blank">';
+			html += '<h4>' + name + '</h4>';
+			html += '<span class="type"><img src="' + iconURL + '" alt="' + type + '" /> ' + type + '</span>';
+			html += '<span class="checkins">' + hereNow + ' people here now / ' + checkins + ' total</span>';
+			html += '</a>';
+
+			$('<li />').html(html).appendTo($('#trends'));
+		});
+	} else {
+		$('<li />').html('<span class="none">No venues are trending right now. How lame!</span>').appendTo($('#trends'));
+	}
+}
+	
 $(document).ready(function() {
 	Parse.initialize('0eVcAKXZWKD1p8Dy8MiipuCy7Ye67y64lBEOjuYW', '3nZXyBOHROHK9YAoj0jvEGyQjdf4IEpBYAZC0W2k');
 	google.maps.event.addDomListener(window, 'load', initialize);
@@ -56,18 +107,10 @@ $(document).ready(function() {
 	Parse.Cloud.run('trendingInDSM', {}, {
 		success: function(result) {
 			setMarkers(result);
+			setTrendsList(result);
 		},
 		error: function(error) {
 			console.log(error);
-		}
-	});
-
-	Parse.Cloud.run('trendingInNYC', {}, {
-		success: function(result) {
-			console.log(result);
-		},
-		error: function(result, error) {
-			console.log(error.message);
 		}
 	});
 });
