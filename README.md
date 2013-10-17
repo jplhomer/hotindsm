@@ -14,7 +14,7 @@ See the live demo at [http://jplhomer.github.io/hotindsm/](http://jplhomer.githu
  
 ## Development
 
-To create your own, clones the repository. You'll need Node installed. Navigate to the repository on your local machine and run:
+To develop on a local machine, you'll need NodeJS installed. Navigate to the repository on your local machine and run:
 
 `npm install`
 
@@ -41,3 +41,5 @@ To deploy this Cloud Code for your own using, follow the instructions on [Parse'
 To run the Cloud Code, you'll need to register a new application on [Foursquare](http://developer.foursquare.com).
 
 Replace the `client_id` and `client_secret` parameters in the `hitFoursquare` function within `main.js`. Yeah, this is pretty messy. But just do it.
+
+You'll also probably want to update the `lat` and `lng` parameters of the API request URL to to be Des Moines. So it's totally up to you.
