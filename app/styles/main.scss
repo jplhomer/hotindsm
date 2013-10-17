@@ -18,31 +18,19 @@ header {
 	position: fixed;
 	top: 0;
 	left: 0;
-	bottom: 0;
 	font-family: $noticia;
 	z-index: 100;
 	background: $dark;
 	padding: 1em 0;
-	width: 250px;
-	overflow-x: scroll;
-
+	width: 100%;
 	color: #efefef;
 
 	@include opacity(0.9);
 
 	h1 {
 		color: tan;
-		line-height: 0.8;
-		text-align: center;
-		font-size: 3.5em;
-		margin: 0 0 0.5em 0;
-		text-shadow: 1px 1px 3px #666;
-
-		em {
-			display: block;
-			font-size: 1.5em;
-			font-style: normal;
-		}
+		margin: 0;
+		padding-left: 1em;
 	}
 
 	h2 {
@@ -65,6 +53,37 @@ header {
 		padding-bottom: 1rem;
 		padding-top: 1rem;
 		font-size: 0.7em;
+	}
+
+	h2, p, ul {
+		display: none;
+	}
+
+	@media screen and (min-width: 40em) {
+		bottom: 0;
+		width: 250px;
+		overflow-x: scroll;
+
+		h1 {
+			color: tan;
+			line-height: 0.8;
+			text-align: center;
+			font-size: 3.5em;
+			margin: 0 0 0.5em 0;
+			text-shadow: 1px 1px 3px #666;
+			padding-left: 0;
+
+			em {
+				display: block;
+				font-size: 1.5em;
+				font-style: normal;
+			}
+		}
+
+		h2, p, ul {
+			display: block;
+		}
+
 	}
 }
 
@@ -105,5 +124,13 @@ header {
 
 	.checkins {
 		font-size: 0.8em;
+	}
+}
+
+.fork-me {
+	display: none;
+
+	@media screen and (min-width: 40em) {
+		display: block;
 	}
 }
