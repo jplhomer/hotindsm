@@ -52,16 +52,16 @@ function initialize() {
 
 function setMarkers(venues) {
 	$(venues).each(function(i, venue) {
-		var ll = new google.maps.LatLng( venue.location.lat, venue.location.lng );
+		var ll = new google.maps.LatLng( venue.data.location.lat, venue.data.location.lng );
 		var marker = new google.maps.Marker({
 			position: ll,
 			map: map,
 			animation: google.maps.Animation.DROP,
-			title: venue.name + ' (' + venue.hereNow.count + ' people here)'
+			title: venue.data.name + ' (' + venue.data.hereNow.count + ' people here)'
 		});
 
 		var contentString = "<div class='info-window'>" +
-			"<h4>" + venue.name + " (" + venue.hereNow.count + " here now)</h4>";
+			"<h4>" + venue.data.name + " (" + venue.data.hereNow.count + " here now)</h4>";
 
 		infowindow = new google.maps.InfoWindow({
 			content: contentString
@@ -79,14 +79,14 @@ function setMarkers(venues) {
 function setTrendsList(venues) {
 	if ( venues.length > 0 ) {
 		$(venues).each(function(i, venue) {
-			console.log(venue);
+			console.log(venue.data);
 
-			var name = venue.name;
-			var hereNow = venue.hereNow.count;
-			var checkins = venue.stats.checkinsCount;
-			var type = venue.categories[0].shortName;
-			var iconURL = venue.categories[0].icon.prefix + '64' + venue.categories[0].icon.suffix;
-			var url = 'http://foursquare.com/venue/' + venue.id;
+			var name = venue.data.name;
+			var hereNow = venue.data.hereNow.count;
+			var checkins = venue.data.stats.checkinsCount;
+			var type = venue.data.categories[0].shortName;
+			var iconURL = venue.data.categories[0].icon.prefix + '64' + venue.data.categories[0].icon.suffix;
+			var url = 'http://foursquare.com/venue/' + venue.data.id;
 
 			var html = '<a href="' + url + '" target="_blank">';
 			html += '<h4>' + name + '</h4>';
@@ -108,6 +108,7 @@ $(document).ready(function() {
 
 	Parse.Cloud.run('trendingInDSM', {}, {
 		success: function(result) {
+			console.log(result);
 			setMarkers(result);
 			setTrendsList(result);
 		},
