@@ -1,36 +1,61 @@
 @import 'compass';
 
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
-$noticia: 'Noticia Text', serif;
+$lato: 'Noticia Text', serif;
+$lato: 'Lato', sans-serif;
 
 $green: #c4d0a4;
 $orange: #E89549;
 $red: #FF0000;
 $purple: #540CE8;
 $maroon: #9D736C;
-$dark: rgba(0, 0, 0, 0.9);
+$dark: rgb(0, 55, 114);
+$blue: #abbbcc;
+$light: #ffffff;
 
-html { height: 100% }
-body { height: 100%; margin: 0; padding: 0 }
-#map-canvas { height: 100% }
+* {
+	@include box-sizing(border-box);
+}
+
+html { 
+	height: 100%;
+}
+
+body { 
+	height: 100%; 
+	margin: 0; 
+	padding: 0;
+	font-family: $lato;
+	background: $dark;
+}
+
+h1, h2, h3 {
+	font-weight: 100;
+}
+
+#map-canvas { 
+	display: none; // Hide on mobile
+	height: 100%;
+
+	margin-left: 30%;
+
+	@media screen and (min-width: 40em) {
+		display: block;
+	}
+}
 
 header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	font-family: $noticia;
-	z-index: 100;
+	
 	background: $dark;
-	padding: 1em 0;
+	padding: 1em 0 0;
 	width: 100%;
 	color: #efefef;
 
-	@include opacity(0.9);
-
 	h1 {
-		color: tan;
 		margin: 0;
-		padding-left: 1em;
+		font-weight: 100;
+		font-size: 3em;
+		text-align: center;
 	}
 
 	h2 {
@@ -46,66 +71,146 @@ header {
 		color: $orange;
 	}
 
-	p.attribution {
-		background: #000;
-		position: absolute;
-		bottom: 0;
-		padding-bottom: 1rem;
-		padding-top: 1rem;
-		font-size: 0.7em;
-	}
-
-	h2, p, ul {
-		display: none;
-	}
-
 	@media screen and (min-width: 40em) {
-		bottom: 0;
-		width: 250px;
-		overflow-x: scroll;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding: 0;		
 
 		h1 {
-			color: tan;
-			line-height: 0.8;
-			text-align: center;
-			font-size: 3.5em;
-			margin: 0 0 0.5em 0;
-			text-shadow: 1px 1px 3px #666;
-			padding-left: 0;
-
-			em {
-				display: block;
-				font-size: 1.5em;
-				font-style: normal;
-			}
+			display: inline-block;
+			width: 30%;
+			font-size: 2em;
+			margin: 0.6em 0;
 		}
 
-		h2, p, ul {
-			display: block;
+		p.description {
+			position: absolute;
+			width: 30%;
 		}
-
 	}
 }
 
-#trends {
+.filters {
+	input {
+		position: absolute;
+		@include opacity(0);
+	}
+
+	label {
+		text-transform: uppercase;
+		font-weight: lighter;
+		text-align: center;
+		padding: 1em;
+		cursor: pointer;
+		@include inline-block;
+
+		&:hover {
+			background: lighten($dark, 10%);
+		}
+	}
+
+	label:not(:first-of-type) {
+		margin-left: -4px;
+	}
+
+	label[for*=trend] {
+		width: 50%;
+	}
+
+	label[for*=timeofday] {
+		width: 33%;
+
+		&:last-of-type {
+			width: 34%;
+		}
+	}
+
+	input:checked + label {
+		background: lighten($dark, 10%);
+		box-shadow: inset 0 0 20px 2px rgba(125, 125, 175, 0.6);
+	}
+
+	.time-of-day {
+		background: darken($dark, 5%);
+		max-height: 0;
+		@include transition(all 0.4s ease-in-out);
+		@include opacity(0);
+
+		&.open {
+			max-height: 200px;
+			@include opacity(1);
+		}
+	}
+
+	@media screen and (min-width: 40em) {
+		width: 63%;
+		position: absolute;
+		top: 0;
+		left: 30%;
+
+		.time-of-day {
+			display: inline-block;
+			width: 49%;
+		}
+
+		label {
+			padding: 1.8em 1em;
+		}
+
+		label[for*=trend] {
+			width: auto;
+		}
+	}
+}
+
+.trends {
+	background: $dark;
+	color: $light;
+	padding: 1em;
+
+	h2 {
+		margin-top: 0;
+	}
+
+	@media screen and (min-width: 40em) {
+		position: absolute;
+		width: 30%;
+		left: 0;
+		top: 175px;
+	}
+}
+
+#trends-list {
 	list-style: none;
 	padding: 0;
+	margin: 0;
+
+	li {
+		background: $light;
+		border-radius: 5px;
+		margin-bottom: 1em;
+		overflow: hidden;
+	}
 
 	a {
 		text-decoration: none;
-		color: $orange;
+		color: #333333;
 		display: block;
-		padding: 1em 1em 1em 1.5em;
 
 		@include transition(background 0.3s ease-in-out);
 
 		&:hover {
-			background: #000;
+			background: #dddddd;
 		}
 	}
 
 	h4 {
 		margin: 0;
+		padding: 0.5em;
+		font-weight: lighter;
+		@include background(linear-gradient(#efefef, #cccccc));
 	}
 
 	.none {
@@ -114,23 +219,45 @@ header {
 		display: block;
 	}
 
-	.type, .checkins {
-		display: block;
+	.here-now, .total-checkins {
+		@include inline-block;
+		width: 50%;
+		text-align: center;
 	}
 
-	.type img {
-		width: 15px;
+	.here-now {
+		font-size: 2em;
+		font-weight: 100;
 	}
 
-	.checkins {
-		font-size: 0.8em;
+	.total-checkins {
+		color: #999;
+		border-left: 1px solid #999;
+		padding: 0.75em 0;
+	}
+
+	@media screen and (min-width: 40em) {
+		overflow: scroll;
 	}
 }
 
-.fork-me {
-	display: none;
+footer {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 1em;
+	font-size: 0.7em;
+	background: $dark;
+	color: $light;
+	text-align: right;
 
-	@media screen and (min-width: 40em) {
-		display: block;
+	a, a:visited {
+		color: $light;
+	}
+
+	p {
+		margin: 0;
 	}
 }

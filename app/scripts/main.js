@@ -1,5 +1,5 @@
 var infowindow = null;
-var map;
+var map, currentTimeOfDay;
 
 function initialize() {
 	var stylesArray = [
@@ -92,14 +92,31 @@ function setTrendsList(venues) {
 
 			var html = '<a href="' + url + '" target="_blank">';
 			html += '<h4>' + name + '</h4>';
-			html += '<span class="type"><img src="' + iconURL + '" alt="' + type + '" /> ' + type + '</span>';
-			html += '<span class="checkins">' + hereNow + ' people here now / ' + checkins + ' total</span>';
+			//html += '<span class="type"><img src="' + iconURL + '" alt="' + type + '" /> ' + type + '</span>';
+			html += '<span class="here-now">' + hereNow + '</span><span class="total-checkins">' + checkins + ' checkins</span>';
 			html += '</a>';
 
-			$('<li />').html(html).appendTo($('#trends'));
+			$('<li />').html(html).appendTo($('#trends-list'));
 		});
 	} else {
 		$('<li />').html('<span class="none">No venues are trending right now. How lame!</span>').appendTo($('#trends'));
+	}
+}
+
+function toggleTimeOfDay() {
+	$('.time-of-day').toggleClass('open');
+}
+
+function clearTimeOfDayOptions() {
+	$('.time-of-day input').removeAttr('checked');
+}
+
+function maybeResetTimeOfDay(value) {
+	if (currentTimeOfDay == value) {
+		$('input[name=timeofday]').removeAttr('checked');
+		currentTimeOfDay = '';
+	} else {
+		currentTimeOfDay = value;
 	}
 }
 	
@@ -117,5 +134,15 @@ $(document).ready(function() {
 		error: function(error) {
 			console.log(error);
 		}
+	});
+
+	$('input[name=trend]').change(function() {
+		var status = $('input[name-trend]:checked').val();
+		toggleTimeOfDay();
+		clearTimeOfDayOptions();
+	});
+
+	$('input[name=timeofday]').click(function() {
+		maybeResetTimeOfDay($(this).val());
 	});
 });
