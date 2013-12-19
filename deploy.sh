@@ -9,7 +9,7 @@ default_username=deploy.sh
 default_email=
 
 #repository to deploy to. must be readable and writable.
-repo=origin
+repo=github
 
 if [[ $1 = "-v" || $1 = "--verbose" ]]; then
 	verbose=true
