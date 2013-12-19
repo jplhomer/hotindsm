@@ -12,6 +12,10 @@ $maroon: #9D736C;
 $dark: rgb(0, 55, 114);
 $blue: #abbbcc;
 $light: #ffffff;
+$neutral: #333;
+$dim: rgba(0, 0, 0, 0.75);
+
+$sidebar-width: 20rem;
 
 * {
 	@include box-sizing(border-box);
@@ -37,7 +41,7 @@ h1, h2, h3 {
 	display: none; // Hide on mobile
 	height: 100%;
 
-	margin-left: 30%;
+	margin-left: $sidebar-width;
 
 	@media screen and (min-width: 40em) {
 		display: block;
@@ -80,14 +84,14 @@ header {
 
 		h1 {
 			display: inline-block;
-			width: 30%;
-			font-size: 2em;
-			margin: 0.6em 0;
+			width: $sidebar-width;
+			font-size: 3em;
+			margin: 0.6rem 0;
 		}
 
 		p.description {
 			position: absolute;
-			width: 30%;
+			width: $sidebar-width;
 		}
 	}
 }
@@ -148,7 +152,7 @@ header {
 		width: 63%;
 		position: absolute;
 		top: 0;
-		left: 30%;
+		left: $sidebar-width;
 
 		.time-of-day {
 			display: inline-block;
@@ -166,7 +170,7 @@ header {
 }
 
 .trends {
-	background: $dark;
+	background: $neutral;
 	color: $light;
 	padding: 1em;
 
@@ -176,9 +180,12 @@ header {
 
 	@media screen and (min-width: 40em) {
 		position: absolute;
-		width: 30%;
+		width: $sidebar-width;
 		left: 0;
+		bottom: 0;
 		top: 175px;
+		z-index: 10;
+		overflow: scroll;
 	}
 }
 
@@ -186,23 +193,24 @@ header {
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	color: $light;
 
 	li {
-		background: $light;
-		border-radius: 5px;
 		margin-bottom: 1em;
 		overflow: hidden;
 	}
 
 	a {
 		text-decoration: none;
-		color: #333333;
 		display: block;
+		color: $light;
+		opacity: 0.9;
+		filter: alpha(opacity=0.9);
 
 		@include transition(background 0.3s ease-in-out);
 
 		&:hover {
-			background: #dddddd;
+			background: #000;
 		}
 	}
 
@@ -210,7 +218,6 @@ header {
 		margin: 0;
 		padding: 0.5em;
 		font-weight: lighter;
-		@include background(linear-gradient(#efefef, #cccccc));
 	}
 
 	.none {
@@ -221,23 +228,16 @@ header {
 
 	.here-now, .total-checkins {
 		@include inline-block;
-		width: 50%;
-		text-align: center;
 	}
 
 	.here-now {
 		font-size: 2em;
 		font-weight: 100;
+		padding-right: 1rem;
 	}
 
 	.total-checkins {
 		color: #999;
-		border-left: 1px solid #999;
-		padding: 0.75em 0;
-	}
-
-	@media screen and (min-width: 40em) {
-		overflow: scroll;
 	}
 }
 
@@ -249,7 +249,7 @@ footer {
 	bottom: 0;
 	padding: 1em;
 	font-size: 0.7em;
-	background: $dark;
+	background: $dim;
 	color: $light;
 	text-align: right;
 

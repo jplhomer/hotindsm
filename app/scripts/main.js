@@ -168,7 +168,7 @@ function setTrendsList(trendsType, timeOfDay) {
 			var html = '<a href="' + url + '" target="_blank">';
 			html += '<h4>' + name + '</h4>';
 			//html += '<span class="type"><img src="' + iconURL + '" alt="' + type + '" /> ' + type + '</span>';
-			html += '<span class="here-now">' + hereNow + '</span><span class="total-checkins">' + checkins + ' checkins</span>';
+			html += '<span class="here-now"><i class="icon-person"></i> ' + hereNow + '</span><span class="total-checkins"><i class="icon-pin"></i> ' + checkins + ' checkins</span>';
 			html += '</a>';
 
 			$('<li />').html(html).appendTo(trendsList);
