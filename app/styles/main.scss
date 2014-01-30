@@ -1,6 +1,38 @@
 @import 'compass';
 
-$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
+@font-face {
+    font-family: 'icomoon';
+    src:url('../fonts/icomoon.eot');
+    src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.woff') format('woff'),
+        url('../fonts/icomoon.ttf') format('truetype'),
+        url('../fonts/icomoon.svg#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-person:before {
+    content: "\e600";
+}
+.icon-pin:before {
+    content: "\e601";
+}
+
+//$icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 $lato: 'Noticia Text', serif;
 $lato: 'Lato', sans-serif;
 
@@ -21,13 +53,13 @@ $sidebar-width: 20rem;
 	@include box-sizing(border-box);
 }
 
-html { 
+html {
 	height: 100%;
 }
 
-body { 
-	height: 100%; 
-	margin: 0; 
+body {
+	height: 100%;
+	margin: 0;
 	padding: 0;
 	font-family: $lato;
 	background: $dark;
@@ -37,7 +69,7 @@ h1, h2, h3 {
 	font-weight: 100;
 }
 
-#map-canvas { 
+#map-canvas {
 	display: none; // Hide on mobile
 	height: 100%;
 
@@ -49,7 +81,7 @@ h1, h2, h3 {
 }
 
 header {
-	
+
 	background: $dark;
 	padding: 1em 0 0;
 	width: 100%;
@@ -80,7 +112,7 @@ header {
 		top: 0;
 		left: 0;
 		width: 100%;
-		padding: 0;		
+		padding: 0;
 
 		h1 {
 			display: inline-block;

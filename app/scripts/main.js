@@ -1,7 +1,7 @@
 'use strict';
 
 var infowindow = null;
-var map, currentTimeOfDay, venues, markersArray,
+var map, currentTimeOfDay, venues, markersArray = [],
     google = google || {},
     Parse = Parse || {};
 var trendsList = $('#trends-list');
@@ -16,7 +16,7 @@ function initialize() {
         zoom: 14,
         disableDefaultUI: true,
         VisualRefresh: true,
-        draggable: false,
+        //draggable: false,
         scrollwheel: false,
         styles: stylesArray,
         mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -49,7 +49,7 @@ function sortPM(a, b) {
 }
 
 function removeMarkers() {
-    console.log(markersArray.length);
+    //console.log(markersArray.length);
     // Remove from the map
     $.each(markersArray, function(i, m) {
         m.setMap(null);
