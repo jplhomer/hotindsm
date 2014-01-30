@@ -22,8 +22,7 @@ function initialize() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 }
 
 /**
@@ -70,11 +69,11 @@ function setMarkers(venueSet) {
             position: ll,
             map: map,
             animation: google.maps.Animation.DROP,
-            title: venue.data.name + ' (' + venue.data.hereNow.count + ' people here)'
+            title: venue.data.name + '<span class="here-now"> (' + venue.data.hereNow.count + ' people here)</span>'
         });
 
         var contentString = '<div class="info-window">' +
-            '<h4>' + venue.data.name + ' (' + venue.data.hereNow.count + ' here now)</h4>';
+            '<h4>' + venue.data.name + '<span class="here-now"> (' + venue.data.hereNow.count + ' here now)</span></h4>';
 
         infowindow = new google.maps.InfoWindow({
             content: contentString
@@ -127,6 +126,10 @@ function setTrendsList(trendsType, timeOfDay) {
         break;
     }
 
+    // Set the body class with our trends type
+    $('body').attr('class', trendsType);
+
+    // Just grab five of them for the list
     venueSet = venueSet.slice(0, 5);
 
     if ( venueSet.length > 0 ) {

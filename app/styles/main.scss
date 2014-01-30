@@ -204,10 +204,10 @@ header {
 .trends {
 	background: $neutral;
 	color: $light;
-	padding: 1em;
 
 	h2 {
 		margin-top: 0;
+        padding: 1em 1em 0;
 	}
 
 	@media screen and (min-width: 40em) {
@@ -228,7 +228,6 @@ header {
 	color: $light;
 
 	li {
-		margin-bottom: 1em;
 		overflow: hidden;
 	}
 
@@ -238,6 +237,7 @@ header {
 		color: $light;
 		opacity: 0.9;
 		filter: alpha(opacity=0.9);
+        padding: 1em;
 
 		@include transition(background 0.3s ease-in-out);
 
@@ -292,4 +292,15 @@ footer {
 	p {
 		margin: 0;
 	}
+}
+
+// Hide .here-now when we're on alltime venues
+.alltime {
+    .here-now {
+        display: none !important;
+    }
+
+    .total-checkins {
+        padding-left: 0.4em;
+    }
 }
